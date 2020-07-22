@@ -1,0 +1,18 @@
+***************
+*** 57,63 ****
+      let lastN = defaultLastN;
+  
+      if (appState !== 'active') {
+-         lastN = 0;
+      } else if (audioOnly) {
+          const { screenShares, tileViewEnabled } = state['features/video-layout'];
+          const largeVideoParticipantId = state['features/large-video'].participantId;
+--- 59,66 ----
+      let lastN = defaultLastN;
+  
+      if (appState !== 'active') {
++         const localVideo = getLocalVideoTrack(state['features/base/tracks']);
++         lastN = localVideo && localVideo.videoType === 'desktop' ? 1 : 0;
+      } else if (audioOnly) {
+          const { screenShares, tileViewEnabled } = state['features/video-layout'];
+          const largeVideoParticipantId = state['features/large-video'].participantId;

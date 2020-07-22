@@ -1,0 +1,35 @@
+***************
+*** 6,11 ****
+      getCurrentConference
+  } from '../conference';
+  import JitsiMeetJS, { JitsiConnectionEvents } from '../lib-jitsi-meet';
+  import {
+      getBackendSafeRoomName,
+      parseURIString
+--- 6,12 ----
+      getCurrentConference
+  } from '../conference';
+  import JitsiMeetJS, { JitsiConnectionEvents } from '../lib-jitsi-meet';
++ import { setDesktopSharingEnabled } from '../conference';
+  import {
+      getBackendSafeRoomName,
+      parseURIString
+***************
+*** 129,134 ****
+              connection.removeEventListener(
+                  JitsiConnectionEvents.CONNECTION_ESTABLISHED,
+                  _onConnectionEstablished);
+              dispatch(connectionEstablished(connection, Date.now()));
+          }
+  
+--- 130,139 ----
+              connection.removeEventListener(
+                  JitsiConnectionEvents.CONNECTION_ESTABLISHED,
+                  _onConnectionEstablished);
++             // Enable desktop sharing.
++             const isDesktopSharingEnabled = JitsiMeetJS.isDesktopSharingEnabled();
++             dispatch(setDesktopSharingEnabled(isDesktopSharingEnabled));
++ 
+              dispatch(connectionEstablished(connection, Date.now()));
+          }
+  

@@ -9,8 +9,6 @@ import { CONFERENCE_JOINED } from '../conference/actionTypes';
 import { getParticipantById } from '../participants/functions';
 import { MiddlewareRegistry } from '../redux';
 
-import { getLocalVideoTrack } from '../tracks';
-
 import logger from './logger';
 
 declare var APP: Object;
